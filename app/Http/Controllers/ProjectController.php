@@ -40,7 +40,7 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
 
-        dd($request);
+        // dd($request);
 
         $request->validated();
 
@@ -59,6 +59,8 @@ class ProjectController extends Controller
 
         $newProject->save();
 
+        $newProject->technologies()->attach($request->technologies);
+
         return redirect()->route("admin.projects.show", $newProject->id);
     }
 
@@ -67,7 +69,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        dd($project->technologies);
+        // dd($project->technologies);
         return view("admin.projects.show", compact("project"));
     }
 
@@ -76,7 +78,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view("admin.projects.edit", compact("project"));
+        $types = Type::all();
+        
+        $technologies = Technology::all();
+
+        return view("admin.projects.edit", compact("project", "types", "technologies"));
     }
 
     /**

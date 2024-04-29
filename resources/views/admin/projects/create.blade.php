@@ -61,7 +61,7 @@
 
             <div class="mb-4">
 
-                <h3>Seleziona la tecnologia utilizzata</h3>
+                <h3>Seleziona le tecnologie utilizzate</h3>
 
                 {{-- @dump($technologies) --}}
 

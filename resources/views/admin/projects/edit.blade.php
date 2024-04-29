@@ -41,6 +41,43 @@
                 <input type="file" class="form-control" id="cover_image" name="cover_image">
             </div>
 
+            <div class="mb-4">
+
+                <h3>Modifica le tecnologie utilizzate</h3>
+
+                {{-- @dump($technologies) --}}
+
+                @foreach ($technologies as $technology)
+                
+                    <div class="form-check">
+
+                        @if ($errors->any)
+                        <input type="checkbox" 
+                            id="{{$technology->name}}" 
+                            name="technologies[]" 
+                            value="{{$technology->id}}"
+                            {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}
+                        >   
+                        @else
+                        <input type="checkbox" 
+                            id="{{$technology->name}}" 
+                            name="technologies[]" 
+                            value="{{$technology->id}}"
+                            {{ $project->technologies->contains($technology) ? 'checked' : '' }}
+                        > 
+                        @endif
+                        <label class="px-2" 
+                        for="{{$technology->name}}">
+                            {{$technology->name}}
+                        </label>
+                    
+                    </div>
+
+                @endforeach
+
+
+            </div>
+
             <button class="btn btn-primary">Modifica</button>
 
         </form>
