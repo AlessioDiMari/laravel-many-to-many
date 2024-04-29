@@ -92,7 +92,17 @@ class ProjectController extends Controller
     {
         $request->validated();
 
+        if( $request->hasFile("cover_image")){
+
+            $path = Storage::disk("public")->put("project_image", $request->cover_image) ;
+
+            $project->update($request->all());
+
+        }
+
         $project->update($request->all());
+
+        $project->technologies()->sync($request->technologies);
 
         return redirect()->route("admin.projects.show", $project->id);
     }

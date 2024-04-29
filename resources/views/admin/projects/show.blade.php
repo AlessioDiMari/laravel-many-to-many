@@ -9,6 +9,12 @@
         <h1>{{$project->name}}</h1>
         <small>{{$project->type->name}}</small>
 
+        <div class="d-flex gap-2 mb-5">
+          @foreach ($project->technologies as $technology)
+            <span class="badge rounded-pill text-bg-primary">{{ $technology->name }}</span>
+          @endforeach
+        </div>
+
         <p class="py-5">{{$project->argument}}</p>
 
 
