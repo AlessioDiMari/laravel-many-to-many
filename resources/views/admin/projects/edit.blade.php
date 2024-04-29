@@ -51,21 +51,22 @@
                 
                     <div class="form-check">
 
-                        @if ($errors->any)
                         <input type="checkbox" 
                             id="{{$technology->name}}" 
                             name="technologies[]" 
                             value="{{$technology->id}}"
-                            {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}
+
+                            @if ($errors->any)
+
+                                {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}
+
+                                @else
+
+                                {{ $project->technologies->contains($technology) ? 'checked' : '' }}
+
+                            @endif
                         >   
-                        @else
-                        <input type="checkbox" 
-                            id="{{$technology->name}}" 
-                            name="technologies[]" 
-                            value="{{$technology->id}}"
-                            {{ $project->technologies->contains($technology) ? 'checked' : '' }}
-                        > 
-                        @endif
+                        
                         <label class="px-2" 
                         for="{{$technology->name}}">
                             {{$technology->name}}

@@ -22,7 +22,25 @@ class UpdateProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name"=> "unique:projects,name|max:255|required",
+            "argument"=> "required",
+            "cover_image"=> "file|max:2048|mimes:jpg,bmp,png|nullable",
+            "type_id"=> "nullable|exists:types,id",
+            "technologies"=> "nullable|exists:technologies,id",
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            "name:unique"=> "È già presente un progetto con questo nome",
+            "name.max"=> "Il nome non può essere più lungo di :max carratteri",
+            "name.required"=> "Il nome del progetto deve essere inserito",
+
+            "argument.required"=> "L'argomento del progetto deve essere inserito", 
+            
+            "cover_image.max"=> "L'immagine non deve pesare più di :max KB",
+            "cover_image.mimes"=> "L'elemento deve essere un'immagine in uno dei seguenti formati: jpg,png,bmp",
         ];
     }
 }
