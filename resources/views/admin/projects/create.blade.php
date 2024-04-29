@@ -59,6 +59,34 @@
 
             </div>
 
+            <div class="mb-4">
+
+                <h3>Seleziona la tecnologia utilizzata</h3>
+
+                {{-- @dump($technologies) --}}
+
+                @foreach ($technologies as $technology)
+                
+                    <div class="form-check">
+
+                        <input type="checkbox" 
+                            id="{{$technology->name}}" 
+                            name="technologies[]" 
+                            value="{{$technology->id}}"
+                            {{ in_array($technology->id, old('technologies', [])) ? 'checked' : '' }}
+                        >
+                        <label class="px-2" 
+                        for="{{$technology->name}}">
+                            {{$technology->name}}
+                        </label>
+                    
+                    </div>
+
+                @endforeach
+
+
+            </div>
+
             <button class="btn btn-primary">Aggiungi</button>
 
         </form>
